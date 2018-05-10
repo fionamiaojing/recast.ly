@@ -5,6 +5,10 @@ class App extends React.Component {
     this.state = {
       videolist: exampleVideoData,
       currentVideo: exampleVideoData[0],
+      options: {
+        key: window.YOUTUBE_API_KEY, 
+        max: 5
+      }                                     
     };
   }
   
@@ -15,8 +19,13 @@ class App extends React.Component {
     });
   }
   
-  onSubmitText() {
-    console.log('submitted');
+  onChangeText(event) {
+    var option = this.state.options;
+    option.query = event.target.value;
+    this.setState({
+      videolist: searchYouTube(option, function() {})
+    });
+    
   }
   
   
@@ -25,7 +34,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search />
+            <Search onChange={this.onChangeText.bind(this)}/>
           </div>
         </nav>
         <div className="row">

@@ -5,12 +5,16 @@ var searchYouTube = (options, callback) => {
     type: 'GET',
     data: {
       part: 'snippet',
-      q: query,
-      maxResults: 5,
-      key: window.YOUTUBE_API_KEY,
+      q: options.query,
+      maxResults: options.max,
+      key: options.key,
+      type: 'video',
+      videoEmbeddable: true
+  
     },
     success: function(data) {
-      console.log(data)
+      
+      callback(data);
     },
     failure: function(data) {
       
