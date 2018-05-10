@@ -3,26 +3,38 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      videolist: exampleVideoData,
-      currentVideo: exampleVideoData[0],
-      options: {
-        key: window.YOUTUBE_API_KEY, 
-        max: 5
-      }                                     
+      videolist: [],
+      currentVideo: exampleVideoData[0],                                 
     };
   }
   
   onClickListVideoTitle(video) {
-    console.log(video);
     this.setState({
       currentVideo: video
     });
   }
   
+  componentDidMount() {
+    var options = {
+      key: window.YOUTUBE_API_KEY,
+      max: 5,
+      query: 'cat',
+    };
+    window.searchYouTube(options, (data) => {
+      this.setState({
+        videolist: data.items,
+        currentVideo: data.items[0],
+      });
+    });
+  }
+
   onChangeText(event) {
-    var option = this.state.options;
-    option.query = event.target.value;
-    searchYouTube(option, (data) => {
+    var options = {
+      key: window.YOUTUBE_API_KEY, 
+      max: 5, 
+      query: event.target.value,
+    };
+    window.debounceSearch(options, (data) => {
       this.setState({
         videolist: data.items,
         currentVideo: data.items[0],
