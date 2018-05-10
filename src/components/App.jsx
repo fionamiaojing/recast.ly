@@ -5,18 +5,18 @@ class App extends React.Component {
     this.state = {
       videolist: exampleVideoData,
       currentVideo: exampleVideoData[0],
-    }
+    };
   }
   
   onClickListVideoTitle(video) {
     console.log(video);
     this.setState({
       currentVideo: video
-    })
+    });
   }
   
   onSubmitText() {
-    console.log('submitted')
+    console.log('submitted');
   }
   
   
@@ -37,9 +37,9 @@ class App extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
-};
+}
 
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
