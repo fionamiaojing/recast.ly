@@ -22,10 +22,12 @@ class App extends React.Component {
   onChangeText(event) {
     var option = this.state.options;
     option.query = event.target.value;
-    this.setState({
-      videolist: searchYouTube(option, function() {})
+    searchYouTube(option, (data) => {
+      this.setState({
+        videolist: data.items,
+        currentVideo: data.items[0],
+      });
     });
-    
   }
   
   

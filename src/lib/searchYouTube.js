@@ -13,7 +13,6 @@ var searchYouTube = (options, callback) => {
   
     },
     success: function(data) {
-      
       callback(data);
     },
     failure: function(data) {
